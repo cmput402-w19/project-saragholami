@@ -1,6 +1,5 @@
 import MySQLdb
 import random
-import numpy as np
 import pandas as pd
 import pandas.io.sql as psql
 

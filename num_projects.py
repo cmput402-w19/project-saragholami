@@ -29,7 +29,7 @@ team_size = []
 
 def load_pkl():
     global project_num, team_size
-    df = pd.read_pickle("./data2/project_num.pkl")
+    df = pd.read_pickle("./data3/project_num.pkl")
     team_size = df['gh_team_size'].tolist()
     project_num = df['project_count'].tolist()
 

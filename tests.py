@@ -56,9 +56,9 @@ def code_mean():
 
 def line_plot():
     index = np.arange(means_failed.shape[0])
-    plt.plot(index, means_ok, marker='o', color='green', linewidth=1)
-    plt.plot(index, means_total, marker='o', color='blue', linewidth=1)
-    plt.plot(index, means_failed, marker='o', color='red', linewidth=1)
+    plt.plot(index, means_ok, marker='o', color='green', linewidth=1, label="Passed tests")
+    plt.plot(index, means_total, marker='o', color='blue', linewidth=1, label="Total tests")
+    plt.plot(index, means_failed, marker='o', color='red', linewidth=1, label="Failed tests")
     plt.xlabel("Team size")
     plt.ylabel("Number of tests")
     plt.legend()

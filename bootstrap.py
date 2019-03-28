@@ -14,7 +14,7 @@ def subsample():
     # print("number of rows ", num_rows)
     for j in range(100):
         ids = []
-        for i in range(1000):
+        for i in range(3000000):
             index = random.randint(0, num_rows - 1)
             # print index
             # print list_of_id[index]

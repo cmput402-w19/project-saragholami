@@ -58,11 +58,20 @@ def line_plot():
     index = np.arange(means_failed.shape[0])
     plt.plot(index, means_ok, marker='o', color='green', linewidth=1, label="Passed tests")
     plt.plot(index, means_total, marker='o', color='blue', linewidth=1, label="Total tests")
-    plt.plot(index, means_failed, marker='o', color='red', linewidth=1, label="Failed tests")
     plt.xlabel("Team size")
     plt.ylabel("Number of tests")
     plt.legend()
     plt.savefig('figs/tests_line.png', dpi=500)
+    plt.show()
+
+
+def line_plot_failure():
+    index = np.arange(means_failed.shape[0])
+    plt.plot(index, means_failed, marker='o', color='red', linewidth=1, label="Failed tests")
+    plt.xlabel("Team size")
+    plt.ylabel("Number of failed tests")
+    plt.legend()
+    plt.savefig('figs/failed_tests_line.png', dpi=500)
     plt.show()
 
 
@@ -71,4 +80,5 @@ if __name__ == '__main__':
     load_pkl()
 
     means_failed, std_failed, means_ok, std_ok, means_total, std_total = code_mean()
+    line_plot_failure()
     line_plot()

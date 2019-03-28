@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def load_pkl():
-    for j in range(1):
+    for j in range(100):
         data_frames.append(pd.read_pickle("./data3/dummy%s.pkl" % j))
 
 
@@ -30,10 +30,13 @@ def line_plot():
     fig, ax = plt.subplots()
     ax.plot(index, fails, marker='o', color='darkorchid', linewidth=1, label="Failed/Errored builds")
     ax.plot(index, passes, marker='o', color='yellowgreen', linewidth=1, label="Passed builds")
-    plt.xlabel("Team size")
-    plt.ylabel("Travis status")
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.xlabel("Team size", fontsize=18)
+    plt.ylabel("Travis status", fontsize=18)
+    fig.suptitle('Travis Build Status', fontsize=20)
     plt.legend()
-    plt.savefig('figs/status_line.png', dpi=500)
+    plt.savefig('figs/status_line.png', dpi=1000)
     plt.show()
 
 

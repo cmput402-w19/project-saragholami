@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
+# TODO refactore, add comments and proper naming
 def load_pkl():
     for j in range(100):
         data_frames.append(pd.read_pickle("../data3/dummy%s.pkl" % j))
@@ -42,7 +42,7 @@ def mean_std():
 
     for a, b in zip(lower_half_mean_passed, upper_half_mean_passed):
         compare_passed.append(a - b)
-    return compare_failure, compare_passed  # mean : (-0.18471455453527175, 0.19370535216223356)
+    return compare_failure, compare_passed
 
 
 def histogram_failure():

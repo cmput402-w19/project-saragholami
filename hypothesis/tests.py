@@ -3,6 +3,7 @@ import math
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def load_pkl():
@@ -15,8 +16,6 @@ def median_tests():
     upper_half_mean_failed = []
     lower_half_mean_ok = []
     upper_half_mean_ok = []
-    lower_half_mean_total = []
-    upper_half_mean_total = []
 
     for idx, df in enumerate(data_frames):
         df = df.sort_values('gh_team_size')
@@ -29,32 +28,26 @@ def median_tests():
         team_size = _means_failed['gh_team_size'].tolist()
         failed_list = _means_failed['tr_log_num_tests_failed'].tolist()
         index = math.floor(len(team_size) / 2)
-        lower_half_mean_failed.append(np.mean(failed_list[:index]))
-        upper_half_mean_failed.append(np.mean(failed_list[index:]))
-
         _means_ok = df.groupby('gh_team_size', as_index=False)['tr_log_num_tests_ok'].mean()
         ok_list = _means_ok['tr_log_num_tests_ok'].tolist()
-        lower_half_mean_ok.append(np.mean(ok_list[:index]))
-        upper_half_mean_ok.append(np.mean(ok_list[index:]))
-
         _means_total = df.groupby('gh_team_size', as_index=False)['tr_log_num_tests_run'].mean()
         total_list = _means_total['tr_log_num_tests_run'].tolist()
-        lower_half_mean_total.append(np.mean(total_list[:index]))
-        upper_half_mean_total.append(np.mean(total_list[index:]))
+
+        lower_half_mean_failed.append(np.mean(failed_list[:index]) / np.mean(total_list[:index]))
+        upper_half_mean_failed.append(np.mean(failed_list[index:]) / np.mean(total_list[index:]))
+        lower_half_mean_ok.append(np.mean(ok_list[:index]) / np.mean(total_list[:index]))
+        upper_half_mean_ok.append(np.mean(ok_list[index:]) / np.mean(total_list[index:]))
 
     compare_failed = []
     compare_ok = []
-    compare_total = []
+    # compare_total = []
     for a, b in zip(lower_half_mean_failed, upper_half_mean_failed):
-        compare_failed.append(a > b)
+        compare_failed.append(a - b)
 
     for a, b in zip(lower_half_mean_ok, upper_half_mean_ok):
-        compare_ok.append(a > b)
+        compare_ok.append(a - b)
 
-    for a, b in zip(lower_half_mean_total, upper_half_mean_total):
-        compare_total.append(a > b)
-
-    return sum(compare_failed), sum(compare_ok), sum(compare_total)
+    return compare_failed, compare_ok
 
 
 # def code_mean():
@@ -114,12 +107,29 @@ def median_tests():
 #     plt.savefig('figs/tests_line.png', dpi=500)
 #     plt.show()
 
+def histogram_failure():
+    sns.distplot(failure_difference, hist=True, kde=True,
+                 bins=10, color='darkblue',
+                 hist_kws={'edgecolor': 'black'},
+                 kde_kws={'linewidth': 4})
+    plt.show()
+
+
+def histogram_passed():
+    sns.distplot(passed_difference, hist=True, kde=True,
+                 bins=10, color='darkgreen',
+                 hist_kws={'edgecolor': 'black'},
+                 kde_kws={'linewidth': 4})
+    plt.show()
+
 
 if __name__ == '__main__':
     data_frames = []
     team_size_median = 30
     load_pkl()
 
-    print(median_tests())
+    failure_difference, passed_difference = median_tests()
+    histogram_failure()
+    histogram_passed()
     # means_failed, std_failed, means_ok, std_ok, means_total, std_total = code_mean()
     # line_plot()

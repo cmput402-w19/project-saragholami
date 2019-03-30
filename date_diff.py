@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def load_pkl():
-    for j in range(100):
+    for j in range(1):
         data_frames.append(pd.read_pickle("./data3/dummy%s.pkl" % j))
 
 
@@ -12,6 +12,7 @@ def mean_std():
     matrix_means = np.zeros((100, 60))
     matrix_std = np.zeros((100, 60))
     for idx, df in enumerate(data_frames):
+        print(df.dtypes)
         df['date_diff'] = df['gh_pushed_at'].sub(df['gh_first_commit_created_at'], axis=0)  # timedelta64[ns] type
         df["date_diff"] = df["date_diff"] / np.timedelta64(1, 'm')
         _means = df.groupby('gh_team_size', as_index=False)['date_diff'].mean()

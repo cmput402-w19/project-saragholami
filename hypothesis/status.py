@@ -5,10 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# TODO refactore, add comments and proper naming
+
 def load_pkl():
     for j in range(100):
-        data_frames.append(pd.read_pickle("../data3/dummy%s.pkl" % j))
+        data_frames.append(pd.read_csv("../sample/sample%s.csv" % j))
 
 
 def mean_std():
@@ -21,16 +21,14 @@ def mean_std():
         df = df.sort_values('gh_team_size')
 
         team_size = df.gh_team_size.unique()
-        index = math.floor(len(team_size) / 2)  # median index
+        index = np.where(team_size == 15)[0][0]
         counts = df.groupby(['gh_team_size']).size().reset_index(name='counts')
         total = list(counts['counts'])
-        failed = df.groupby(['gh_team_size']).tr_status.value_counts().unstack(fill_value=0).loc[:, 'failed'].tolist()
-        errored = df.groupby(['gh_team_size']).tr_status.value_counts().unstack(fill_value=0).loc[:, 'errored'].tolist()
-        passed = df.groupby(['gh_team_size']).tr_status.value_counts().unstack(fill_value=0).loc[:, 'passed'].tolist()
-        failure = [x + y for x, y in zip(failed, errored)]
+        failed = df.groupby(['gh_team_size']).tr_status.value_counts().unstack(fill_value=0).loc[:, 0].tolist()
+        passed = df.groupby(['gh_team_size']).tr_status.value_counts().unstack(fill_value=0).loc[:, 1].tolist()
 
-        lower_half_mean_failure.append(np.mean(failure[:index]) / np.mean(total[:index]))
-        upper_half_mean_failure.append(np.mean(failure[index:]) / np.mean(total[index:]))
+        lower_half_mean_failure.append(np.mean(failed[:index]) / np.mean(total[:index]))
+        upper_half_mean_failure.append(np.mean(failed[index:]) / np.mean(total[index:]))
 
         lower_half_mean_passed.append(np.mean(passed[:index]) / np.mean(total[:index]))
         upper_half_mean_passed.append(np.mean(passed[index:]) / np.mean(total[index:]))
@@ -47,9 +45,17 @@ def mean_std():
 
 def histogram_failure():
     sns.distplot(failure_difference, hist=True, kde=True,
-                 bins=10, color='darkblue',
+                 bins=10, color='darkred',
                  hist_kws={'edgecolor': 'black'},
-                 kde_kws={'linewidth': 4})
+                 kde_kws={'linewidth': 3}).set_title('Build status failure')
+    m = np.nanmean(failure_difference)
+    s = np.nanstd(failure_difference)
+    u = m + 3 * s
+    l = m - 3 * s
+    plt.axvline(x=m, color='green', linewidth=2)
+    plt.axvline(x=u, color='green', linewidth=2)
+    plt.axvline(x=l, color='green', linewidth=2)
+    plt.savefig('../figs2/status_failed.png', dpi=1000)
     plt.show()
 
 
@@ -57,7 +63,15 @@ def histogram_passed():
     sns.distplot(passed_difference, hist=True, kde=True,
                  bins=10, color='darkgreen',
                  hist_kws={'edgecolor': 'black'},
-                 kde_kws={'linewidth': 4})
+                 kde_kws={'linewidth': 3}).set_title('Build status pass')
+    m = np.nanmean(passed_difference)
+    s = np.nanstd(passed_difference)
+    u = m + 3 * s
+    l = m - 3 * s
+    plt.axvline(x=m, color='red', linewidth=2)
+    plt.axvline(x=u, color='red', linewidth=2)
+    plt.axvline(x=l, color='red', linewidth=2)
+    plt.savefig('../figs2/status_passed.png', dpi=1000)
     plt.show()
 
 

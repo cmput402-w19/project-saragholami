@@ -1,14 +1,16 @@
-import math
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+"""
+    Threshold for team size is 15 where the histogram is on one side of X axis.
+"""
+
 
 def load_pkl():
     for j in range(100):
-        data_frames.append(pd.read_pickle("../data3/dummy%s.pkl" % j))
+        data_frames.append(pd.read_csv("../sample/sample%s.csv" % j))
 
 
 def mean_std():
@@ -29,7 +31,7 @@ def mean_std():
         sloc_list = _means_sloc['gh_sloc'].tolist()
         test_list = _means_test['git_diff_test_churn'].tolist()
 
-        index = math.floor(len(team_size) / 2)
+        index = team_size.index(20)
 
         lower_half_mean_src.append(np.mean(src_list[:index]) / np.mean(sloc_list[:index]))
         upper_half_mean_src.append(np.mean(src_list[index:]) / np.mean(sloc_list[index:]))
@@ -47,42 +49,35 @@ def mean_std():
     return compare_src, compare_test
 
 
-# def line_plot():
-#     index = np.arange(means.shape[0])
-#     fig, ax = plt.subplot()
-#     ax.plot(index, means, marker='o', color='crimson', linewidth=1)
-#     ax.set_ylim(bottom=0.)
-#     plt.xlabel("Team size")
-#     plt.ylabel("Mean of source code diff")
-#     plt.legend()
-#     plt.savefig('figs/src_diff_line.png', dpi=500)
-#     plt.show()
-#
-#
-# def scatter_plot():
-#     index = np.arange(means.shape[0])
-#     plt.errorbar(index, means, std, linestyle='None', marker='_', lolims=True, elinewidth=0.5, ecolor='crimson',
-#                  capthick=0.5)
-#     plt.scatter(index, means, color='crimson', linewidth=0.5)
-#     plt.xlabel("Team size")
-#     plt.ylabel("Mean of source code diff")
-#     plt.legend()
-#     plt.savefig('figs/src_diff_scatter.png', dpi=1000)
-#     plt.show()
-
 def histogram_src():
     sns.distplot(src, hist=True, kde=True,
-                 bins=10, color='darkblue',
+                 bins=15, color='c',
                  hist_kws={'edgecolor': 'black'},
-                 kde_kws={'linewidth': 4})
+                 kde_kws={'linewidth': 3}).set_title('Source code changes over total project')
+    m = np.nanmean(src)
+    s = np.nanstd(src)
+    u = m + 2 * s
+    l = m - 2 * s
+    plt.axvline(x=m, color='red', linewidth=2)
+    plt.axvline(x=u, color='red', linewidth=2)
+    plt.axvline(x=l, color='red', linewidth=2)
+    plt.savefig('../figs2/src_diff_ratio.png', dpi=1000)
     plt.show()
 
 
 def histogram_test():
     sns.distplot(test, hist=True, kde=True,
-                 bins=10, color='pink',
+                 bins=15, color='darkmagenta',
                  hist_kws={'edgecolor': 'black'},
-                 kde_kws={'linewidth': 4})
+                 kde_kws={'linewidth': 3}).set_title('Test code changes over total project')
+    m = np.nanmean(test)
+    s = np.nanstd(test)
+    u = m + 2 * s
+    l = m - 2 * s
+    plt.axvline(x=m, color='b', linewidth=2)
+    plt.axvline(x=u, color='b', linewidth=2)
+    plt.axvline(x=l, color='b', linewidth=2)
+    plt.savefig('../figs2/test_diff_ratio.png', dpi=1000)
     plt.show()
 
 
@@ -93,5 +88,3 @@ if __name__ == '__main__':
     src, test = mean_std()
     histogram_src()
     histogram_test()
-    # scatter_plot()
-    # line_plot()

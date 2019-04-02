@@ -24,6 +24,12 @@ def preprocess():
     df = df[df.tr_status != 'canceled']
     df = df[df.tr_status != 'started']
     df['tr_status'] = df['tr_status'].map({'passed': 1, 'failed': 0, 'errored': 0})
+    # Source and test code ratio and their ratio over time
+    df["src_diff_ratio"] = df["git_diff_src_churn"] / df["gh_sloc"]
+    df["src_date"] = df["src_diff_ratio"] / df["date_diff"]
+    df["test_diff_ratio"] = df["git_diff_test_churn"] / df["gh_sloc"]
+    df["test_date"] = df["test_diff_ratio"] / df["date_diff"]
+    df = df.replace([np.inf, -np.inf], np.nan)
     # Save data frame to pickle file
     df.to_pickle("D://CMPUT501/project/project-saragholami/pickle/travis_torrent.pkl")
 
@@ -36,5 +42,5 @@ def subsample():
 
 
 if __name__ == '__main__':
-    # preprocess()
-    subsample()
+    preprocess()
+    # subsample()

@@ -31,7 +31,7 @@ def preprocess():
     df["test_date"] = df["test_diff_ratio"] / df["date_diff"]
     df = df.replace([np.inf, -np.inf], np.nan)
     # Save data frame to pickle file
-    df.to_pickle("D://CMPUT501/project/project-saragholami/pickle/travis_torrent.pkl")
+    df.to_csv("D://CMPUT501/project/project-saragholami/sample/travis_torrent_refined.csv")
 
 
 def subsample():

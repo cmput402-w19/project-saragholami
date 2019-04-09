@@ -29,6 +29,7 @@ def preprocess():
     df["src_date"] = df["src_diff_ratio"] / df["date_diff"]
     df["test_diff_ratio"] = df["git_diff_test_churn"] / df["gh_sloc"]
     df["test_date"] = df["test_diff_ratio"] / df["date_diff"]
+    df = df.replace('', np.nan, inplace=True)
     df = df.replace([np.inf, -np.inf], np.nan)
     # Save data frame to pickle file
     df.to_csv("D://CMPUT501/project/project-saragholami/sample/travis_torrent_refined.csv")

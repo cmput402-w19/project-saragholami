@@ -4,9 +4,16 @@ The main goal of this study is to find the effect of team size on the productivi
 
  * **RQ1** What is the relation between team size and productivity of the development team?<br/>
  * **RQ2** What is the relation between team size and the language of the project?
+ 
+ More information regarding this study can be found in (documantation)[]
+
+## Data
+In this project we are using data from TravisTorrent dataset.
+
+Beller M, Gousios G, Zaidman A. (2017) TravisTorrent: Synthesizing Travis CI and GitHub for Full-Stack Research on Continuous Integration
 
 ## Requirments
-1. Python3
+1. Python 3.7.3
 2. Jupyter Notebook (Only in case you want to see the files in ipython format and check the results)
 3. [travistorrent_8_2_2017.csv.gz](https://travistorrent.testroots.org/page_access/)
 4. Python Libraries
@@ -33,8 +40,3 @@ The following steps represent how to reproduce this workon Ubuntu [18.04](http:/
     ```
     Python3 main.py
     ```
-
-## Data
-In this project we are using data from TravisTorrent dataset.
-
-Beller M, Gousios G, Zaidman A. (2017) TravisTorrent: Synthesizing Travis CI and GitHub for Full-Stack Research on Continuous Integration

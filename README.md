@@ -1,5 +1,9 @@
 # CMPUT 501 Final Project
 ## Motivation
+The main goal of this study is to find the effect of team size on the productivity of the development team. The reason for conducting this study is to give some insight to project managers as at the beginning of any projects there are many different factors to be considered by the project managers and choosing the correct combination is a daunting task. One of these factors is the size of the development team were choosing a small number may result in the high pressure of workload on the development team and choosing a large team can result in having many developers without enough task and result in the waste of money of the company and the developers' time. So, the project managers want to select a team size which leads to an increase in the team productivity and revenue of the company. After selecting the number of team members, the project managers need to choose the project language where there are a wide variety of languages available. This study tries to find if there is any relation between team size and the language of the project. Consequently, there are two main research questions for this study as follows:<br/>
+
+ * **RQ1** What is the relation between team size and productivity of the development team?<br/>
+ * **RQ2** What is the relation between team size and the language of the project?
 
 ## Requirments
 1. Python3
@@ -31,3 +35,6 @@ The following steps represent how to reproduce this workon Ubuntu [18.04](http:/
     ```
 
 ## Data
+In this project we are using data from TravisTorrent dataset.
+
+Beller M, Gousios G, Zaidman A. (2017) TravisTorrent: Synthesizing Travis CI and GitHub for Full-Stack Research on Continuous Integration

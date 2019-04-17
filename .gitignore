@@ -1,11 +1,2 @@
-
-.idea
-/venv
-/data
-/data2
-/data3
 /figs
-/csv
-/sample
-/models
-/pickle
+/.ipynb_checkpoints

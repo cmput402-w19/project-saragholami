@@ -8,7 +8,7 @@ The main goal of this study is to find the effect of team size on the productivi
  More information regarding this study can be found in [documantation](https://github.com/cmput402-w19/project-saragholami/blob/master/Documentation/Report.pdf)
 
 ## Data
-In this project we are using data from TravisTorrent dataset.
+In this project we are using data from TravisTorrent dataset. AS the size of this data is huge it is not possible to upload it on GitHub, however you can [download](https://travistorrent.testroots.org/page_access/) it from the link provided.
 
 Beller M, Gousios G, Zaidman A. (2017) TravisTorrent: Synthesizing Travis CI and GitHub for Full-Stack Research on Continuous Integration
 

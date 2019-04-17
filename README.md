@@ -5,7 +5,7 @@ The main goal of this study is to find the effect of team size on the productivi
  * **RQ1** What is the relation between team size and productivity of the development team?<br/>
  * **RQ2** What is the relation between team size and the language of the project?
  
- More information regarding this study can be found in (documantation)[]
+ More information regarding this study can be found in (documantation)[https://github.com/cmput402-w19/project-saragholami/blob/master/Documentation/Report.pdf]
 
 ## Data
 In this project we are using data from TravisTorrent dataset.

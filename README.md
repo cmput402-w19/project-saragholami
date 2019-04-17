@@ -17,11 +17,11 @@ Beller M, Gousios G, Zaidman A. (2017) TravisTorrent: Synthesizing Travis CI and
 2. Jupyter Notebook (Only in case you want to see the files in ipython format and check the results)
 3. [travistorrent_8_2_2017.csv.gz](https://travistorrent.testroots.org/page_access/)
 4. Python Libraries
-    * Numpy 1.16.2
-    * Pandas 0.24.2
-    * Seaborn 
-    * Scipy
-    * Matplotlib
+    * Numpy 1.15.4
+    * Pandas 0.23.4
+    * Seaborn 0.9.0
+    * Scipy 1.1.0
+    * Matplotlib 3.0.2
 
 ## Steps to Reproduce
 The following steps represent how to reproduce this workon Ubuntu [18.04](http://releases.ubuntu.com/18.04/) environment.

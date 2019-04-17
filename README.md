@@ -36,11 +36,11 @@ The following steps represent how to reproduce this workon Ubuntu [18.04](http:/
 3. Clone this repository on your local machine
 4. Download the [travistorrent_8_2_2017.csv.gz](https://travistorrent.testroots.org/page_access/) and extract it in the directory of this project.
 5. Open the terminal in the directory of this project
-6. Run the following command to refined dataset. The refining Jupyter notebook files are corresponding to this command.
+6. Run the following command to refined dataset. The [Refining](https://github.com/cmput402-w19/project-saragholami/blob/master/Refining.ipynb) Jupyter notebook files are corresponding to this command.
     ```
     Python3 refining.py
     ```
-7. Run the following command to get the results reported in the documentation. You can also check figs folder to see the plots. The distribution, language and threshold Jupyter notebook files are corresponding to this command.
+7. Run the following command to get the results reported in the documentation. You can also check figs folder to see the plots. The [Distribution](https://github.com/cmput402-w19/project-saragholami/blob/master/Distribution.ipynb), [Language](https://github.com/cmput402-w19/project-saragholami/blob/master/language.ipynb) and [Thresholding](https://github.com/cmput402-w19/project-saragholami/blob/master/Thresholding.ipynb) Jupyter notebook files are corresponding to this command.
     ```
     Python3 main.py
     ```
